@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { Wrench, ShieldAlert, Cpu, Truck, MapPin, Phone, ArrowRight, Settings, Clock, ChevronRight, CheckCircle2, Award, Zap } from "lucide-react";
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
+import { Wrench, ShieldAlert, Cpu, Truck, MapPin, Phone, ArrowRight, Settings, Clock, ChevronRight, CheckCircle2, Award, Zap, Menu, X } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import Lenis from "lenis";
 import mechanicImage from './assets/image.png';
 
 function cn(...inputs) {
@@ -36,6 +37,7 @@ const FadeIn = ({ children, delay = 0, className = "", direction = "up" }) => {
 // --- Navbar ---
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,47 +47,87 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navLinks = ["Home", "About", "Services", "Gallery", "Contact"];
+
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={cn(
-        "fixed top-0 left-0 w-full z-50 px-6 transition-all duration-300 border-b",
-        scrolled
-          ? "bg-white/95 backdrop-blur-lg border-ak-light-grey shadow-sm py-4"
-          : "bg-transparent border-transparent py-6"
-      )}
-    >
-      <div className="container mx-auto flex justify-between items-center text-ak-dark-grey">
-        <div className="flex items-center gap-2 group cursor-pointer">
-          <div className="text-4xl font-display font-bold italic tracking-tighter text-ak-red">AK</div>
-          <div className="text-3xl font-display font-medium tracking-tight mt-1">MOTORS</div>
-        </div>
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={cn(
+          "fixed top-0 left-0 w-full px-6 transition-all duration-300 border-b z-[60]",
+          scrolled
+            ? "bg-white/95 backdrop-blur-lg border-ak-light-grey shadow-sm py-4"
+            : "bg-transparent border-transparent py-6"
+        )}
+      >
+        <div className="container mx-auto flex justify-between items-center text-ak-dark-grey relative z-[60]">
+          <div className="flex items-center gap-2 group cursor-pointer z-[60]">
+            <div className="text-4xl font-display font-bold italic tracking-tighter text-ak-red">AK</div>
+            <div className="text-3xl font-display font-medium tracking-tight mt-1">MOTORS</div>
+          </div>
 
-        <div className="hidden md:flex gap-10 items-center">
-          {["Home", "About", "Services", "Gallery", "Contact"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="font-display text-xl uppercase text-ak-grey hover:text-ak-red transition-all duration-300 relative group"
-            >
-              {item}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ak-red transition-all duration-300 group-hover:w-full"></span>
+          <div className="hidden md:flex gap-10 items-center">
+            {navLinks.map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="font-display text-xl uppercase text-ak-grey hover:text-ak-red transition-all duration-300 relative group"
+              >
+                {item}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ak-red transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
+            <a href="#contact" className="border-2 border-ak-red text-ak-red hover:bg-ak-red hover:text-white px-6 py-2 font-display text-xl uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md">
+              Call HQ
             </a>
-          ))}
-          <a href="#contact" className="border-2 border-ak-red text-ak-red hover:bg-ak-red hover:text-white px-6 py-2 font-display text-xl uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md">
-            Call HQ
-          </a>
-        </div>
+          </div>
 
-        <button aria-label="Toggle Menu" className="md:hidden text-ak-red">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-    </motion.nav>
+          <button aria-label="Toggle Menu" className="md:hidden text-ak-red relative z-[60]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+          </button>
+        </div>
+      </motion.nav>
+
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, scaleY: 0, originY: 0 }}
+            animate={{ opacity: 1, scaleY: 1 }}
+            exit={{ opacity: 0, scaleY: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-[50] bg-ak-dark-grey flex flex-col items-center justify-center pt-20"
+          >
+            <div className="flex flex-col items-center gap-8 w-full px-6">
+              {navLinks.map((item, i) => (
+                <motion.a
+                  key={item}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 + 0.2 }}
+                  href={`#${item.toLowerCase()}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="font-display text-5xl font-bold uppercase text-white hover:text-ak-red transition-colors"
+                >
+                  {item}
+                </motion.a>
+              ))}
+              <motion.a
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navLinks.length * 0.1 + 0.2 }}
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-8 bg-ak-red w-full text-center text-white px-10 py-5 font-display text-2xl uppercase tracking-wider shadow-md hover:bg-red-700 transition"
+              >
+                Engage Services
+              </motion.a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
@@ -308,7 +350,7 @@ const Services = () => {
           {services.map((svc, idx) => (
             <FadeIn key={idx} delay={idx * 0.1} direction="up" className="h-full">
               <div className="group relative p-8 h-full overflow-hidden bg-white border border-ak-mid-grey/40 hover:border-ak-red hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                <div className="absolute -right-4 -bottom-10 text-[120px] font-display font-bold text-ak-light-grey/50 select-none pointer-events-none group-hover:text-ak-light-grey group-hover:-translate-y-4 transition-all duration-500">
+                <div className="absolute top-4 right-6 text-[80px] leading-none font-display font-bold text-ak-light-grey/60 select-none pointer-events-none group-hover:text-ak-red/10 group-hover:scale-110 origin-top-right transition-all duration-500">
                   0{idx + 1}
                 </div>
 
@@ -335,49 +377,89 @@ const Services = () => {
 
 // --- Gallery Section ---
 const Gallery = () => {
-  const images = [
-    new URL('./assets/6.png', import.meta.url).href,
-    new URL('./assets/1.png', import.meta.url).href,
-    new URL('./assets/2.png', import.meta.url).href,
-    new URL('./assets/3.png', import.meta.url).href,
-    new URL('./assets/4.png', import.meta.url).href,
-    new URL('./assets/5.jpeg', import.meta.url).href
+  const [images, setImages] = useState([
+    { id: 1, src: new URL('./assets/6.png', import.meta.url).href, title: "Engine Rebuild" },
+    { id: 2, src: new URL('./assets/1.png', import.meta.url).href, title: "Diagnostic Bay" },
+    { id: 3, src: new URL('./assets/2.png', import.meta.url).href, title: "Fleet Bay" },
+    { id: 4, src: new URL('./assets/3.png', import.meta.url).href, title: "Chassis Align" },
+    { id: 5, src: new URL('./assets/4.png', import.meta.url).href, title: "Heavy Parts" },
+    { id: 6, src: new URL('./assets/5.jpeg', import.meta.url).href, title: "Night Ops" }
+  ]);
+
+  const spans = [
+    "col-span-2 row-span-2",
+    "col-span-2 row-span-1",
+    "col-span-1 row-span-2",
+    "col-span-1 row-span-1",
+    "col-span-1 row-span-1",
+    "col-span-1 md:col-span-2 row-span-1"
   ];
 
+  useEffect(() => {
+    const shuffleArray = () => {
+      setImages(prev => {
+        const shuffled = [...prev];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      });
+    };
+
+    const intervalId = setInterval(shuffleArray, 3000);
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
-    <section id="gallery" className="py-24 bg-white">
-      <div className="container mx-auto px-6">
+    <section id="gallery" className="py-24 bg-ak-white relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <FadeIn>
-            <h2 className="text-5xl md:text-6xl font-display font-bold leading-none text-ak-dark-grey">
+            <h2 className="text-5xl md:text-7xl font-display font-bold leading-none text-ak-dark-grey">
               THE <span className="text-ak-red">FRONTLINE</span>
             </h2>
             <div className="w-24 h-1.5 bg-ak-red mt-6"></div>
           </FadeIn>
           <FadeIn delay={0.2} className="mt-6 md:mt-0 max-w-lg">
             <p className="text-ak-grey font-sans text-lg border-l-4 border-ak-red pl-4">
-              A glimpse into our facility, our heavy equipment, and the dedicated professionals keeping your fleet operational.
+              A dynamic glimpse into our facility, tracking heavy equipment and the dedicated mechanics powering your logistics.
             </p>
           </FadeIn>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[250px]">
           {images.map((img, idx) => (
-            <FadeIn key={idx} delay={idx * 0.1} className="group relative aspect-square overflow-hidden bg-ak-light-grey">
+            <motion.div
+              layout
+              key={img.id}
+              transition={{ 
+                layout: { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
+                opacity: { duration: 0.8 }
+              }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              className={cn(
+                "group relative overflow-hidden bg-ak-light-grey border border-ak-mid-grey/30 hover:border-ak-red/50 shadow-sm hover:shadow-2xl transition-colors duration-500",
+                spans[idx]
+              )}
+            >
               <img
-                src={img}
-                alt={`Gallery visual representation ${idx + 1}`}
+                src={img.src}
+                alt={img.title}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+                className="w-full h-full object-cover filter grayscale opacity-90 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ak-dark-grey/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                <div className="w-full">
-                  <div className="w-10 h-1 bg-ak-red mb-2"></div>
-                  <h4 className="text-white font-display text-2xl uppercase">AK Motors Facility</h4>
-                </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-ak-dark-grey/90 via-ak-dark-grey/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                 <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    <div className="w-10 h-1 bg-ak-red mb-3"></div>
+                    <h4 className="text-white font-display text-2xl md:text-3xl uppercase tracking-wide">{img.title}</h4>
+                    <p className="text-ak-light-grey text-xs md:text-sm font-sans mt-2 tracking-widest uppercase">Classified Asset</p>
+                 </div>
               </div>
-            </FadeIn>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -555,6 +637,27 @@ const Footer = () => (
 
 // --- Main App ---
 export default function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+    
+    return () => {
+      lenis.destroy();
+    }
+  }, []);
+
   return (
     <div className="relative bg-ak-white min-h-screen">
       <Navbar />
