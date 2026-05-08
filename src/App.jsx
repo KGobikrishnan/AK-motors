@@ -261,7 +261,7 @@ const About = () => {
               alt="Mechanic working on engine" 
               loading="lazy" 
               decoding="async" 
-              className="w-full h-auto aspect-[4/3] object-cover relative z-10 rounded-sm shadow-xl grayscale hover:grayscale-0 transition-all duration-700" />
+              className="w-full h-auto aspect-[4/3] object-cover relative z-10 rounded-sm shadow-xl transition-all duration-700" />
 
             <div className="absolute bottom-5 right-5 bg-ak-red text-white p-6 z-20 shadow-2xl">
               <div className="text-5xl font-display font-bold leading-none">15+</div>
@@ -313,24 +313,24 @@ const About = () => {
 const Services = () => {
   const services = [
     {
-      icon: <Cpu className="w-10 h-10" />,
-      title: "Engine Overhaul",
-      description: "Complete tear-down, inspection, and rebuilding of heavy-duty engines to factory specifications."
-    },
-    {
-      icon: <ShieldAlert className="w-10 h-10" />,
-      title: "Computer Diagnostics",
-      description: "Advanced ECUs, ABS, and fuel injection tracking using cutting-edge OEM software."
-    },
-    {
-      icon: <Settings className="w-10 h-10" />,
-      title: "Drivetrain & Transmission",
-      description: "Clutch replacements and differential repairs for maximum payload hauling efficiency."
+      icon: <Wrench className="w-10 h-10" />,
+      title: "Mechanical & Electrical Works",
+      description: "Specialized repair and maintenance for tipper lorries and heavy vehicles, including expert electrical wiring and extra fittings."
     },
     {
       icon: <Truck className="w-10 h-10" />,
-      title: "Fleet Maintenance",
-      description: "Scheduled checkups, fluid dynamics, and structural inspections for entire logistical fleets."
+      title: "Body Works & Painting",
+      description: "High-quality tinkering and professional painting services to keep your vehicle in top condition."
+    },
+    {
+      icon: <Settings className="w-10 h-10" />,
+      title: "Spares & Accessories",
+      description: "One-stop shop for heavy vehicle spare parts, leading brand tires at affordable prices, AdBlue, and GPS installations."
+    },
+    {
+      icon: <CheckCircle2 className="w-10 h-10" />,
+      title: "Vehicle Care & Documentation",
+      description: "Premium water wash using fresh water, plus assistance with RTO stickers and insurance facilities."
     }
   ];
 
@@ -340,28 +340,28 @@ const Services = () => {
         <div className="text-center mb-16">
           <FadeIn>
             <h2 className="text-5xl md:text-7xl font-display font-bold leading-none text-ak-dark-grey">
-              OUR <span className="text-ak-red">ARSENAL</span>
+              OUR <span className="text-ak-red">SERVICES</span>
             </h2>
             <div className="w-24 h-1.5 bg-ak-red mt-6 mx-auto"></div>
           </FadeIn>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
           {services.map((svc, idx) => (
             <FadeIn key={idx} delay={idx * 0.1} direction="up" className="h-full">
-              <div className="group relative p-8 h-full overflow-hidden bg-white border border-ak-mid-grey/40 hover:border-ak-red hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                <div className="absolute top-4 right-6 text-[80px] leading-none font-display font-bold text-ak-light-grey/60 select-none pointer-events-none group-hover:text-ak-red/10 group-hover:scale-110 origin-top-right transition-all duration-500">
+              <div className="group relative p-5 md:p-8 h-full overflow-hidden bg-white border border-ak-mid-grey/40 hover:border-ak-red hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                <div className="absolute top-4 right-6 text-[60px] md:text-[80px] leading-none font-display font-bold text-ak-light-grey/60 select-none pointer-events-none group-hover:text-ak-red/10 group-hover:scale-110 origin-top-right transition-all duration-500">
                   0{idx + 1}
                 </div>
 
-                <div className="mb-6 p-4 inline-block bg-ak-light-grey text-ak-grey group-hover:bg-ak-red group-hover:text-white transform transition-all duration-500">
+                <div className="mb-4 md:mb-6 p-3 md:p-4 inline-block bg-ak-light-grey text-ak-grey group-hover:bg-ak-red group-hover:text-white transform transition-all duration-500">
                   {svc.icon}
                 </div>
 
-                <h3 className="text-2xl font-display font-bold mb-3 tracking-wide text-ak-dark-grey">
+                <h3 className="text-lg md:text-2xl font-display font-bold mb-2 md:mb-3 tracking-wide text-ak-dark-grey">
                   {svc.title}
                 </h3>
-                <p className="text-ak-grey font-sans leading-relaxed text-base relative z-10 mb-6">
+                <p className="text-ak-grey font-sans leading-relaxed text-xs md:text-base relative z-10 mb-4 md:mb-6">
                   {svc.description}
                 </p>
 
@@ -374,6 +374,52 @@ const Services = () => {
     </section>
   );
 };
+
+// --- Expertise Section ---
+const Expertise = () => {
+  const brands = [
+    { name: "Ashok Leyland", src: "https://www.logo.wine/a/logo/Ashok_Leyland/Ashok_Leyland-Logo.wine.svg" },
+    { name: "BharatBenz", src: "https://i.pinimg.com/736x/73/06/ad/7306ad1a0d868aaef1229848caf5d905.jpg" },
+    { name: "Tata", src: "https://listcarbrands.com/wp-content/uploads/2017/10/2017-logo-Tata-Motors.jpg" },
+    { name: "Mahindra", src: "https://upload.wikimedia.org/wikipedia/commons/8/82/Mahindra_Auto.png" },
+    { name: "Eicher", src: "https://wp.logos-download.com/wp-content/uploads/2022/01/Eicher_Tractor_Logo-700x395.png" }
+  ];
+
+  return (
+    <section className="py-24 bg-white relative overflow-hidden border-b border-ak-mid-grey/20">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <FadeIn>
+            <h2 className="text-5xl md:text-7xl font-display font-bold leading-none text-ak-dark-grey">
+              OUR <span className="text-ak-red">EXPERTISE</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-ak-red mt-6 mx-auto"></div>
+          </FadeIn>
+          <FadeIn delay={0.2} className="mt-8 max-w-2xl mx-auto">
+            <p className="text-ak-grey font-sans text-lg md:text-xl leading-relaxed">
+              We provide high-quality service through expert mechanics with over 5 years of experience in leading automotive brands.
+            </p>
+          </FadeIn>
+        </div>
+
+        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20">
+          {brands.map((brand, idx) => (
+            <FadeIn key={idx} delay={idx * 0.1} direction="up">
+              <div className="group relative">
+                <img 
+                  src={brand.src} 
+                  alt={brand.name} 
+                  className="h-20 md:h-32 w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-500 cursor-default"
+                />
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 
 // --- Gallery Section ---
 const Gallery = () => {
@@ -462,7 +508,7 @@ const Gallery = () => {
                 alt={img.title}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover filter grayscale opacity-90 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
+                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ak-dark-grey/90 via-ak-dark-grey/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                  <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -604,7 +650,7 @@ const Contact = () => {
             marginHeight="0"
             marginWidth="0"
             src="https://www.openstreetmap.org/export/embed.html?bbox=77.22%2C9.70%2C77.30%2C9.78&amp;layer=mapnik&amp;marker=9.74%2C77.27"
-            style={{ filter: "grayscale(100%) opacity(0.5)", pointerEvents: "none" }}
+            style={{ filter: "opacity(0.5)", pointerEvents: "none" }}
             className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-70"
           ></iframe>
 
@@ -631,7 +677,7 @@ const Contact = () => {
 const Footer = () => (
   <footer className="bg-[#05080f] py-10 border-t-[6px] border-ak-red">
     <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-      <div className="flex items-center gap-2 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all">
+      <div className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-all">
         <img src="/logo.png" alt="AK Logo" className="h-12 w-auto object-contain" />
         <div className="text-3xl font-display font-medium tracking-tight text-white mt-1">MOTORS</div>
       </div>
@@ -718,6 +764,7 @@ export default function App() {
         <BrandMarquee />
         <About />
         <Services />
+        <Expertise />
         <Gallery />
         <Contact />
       </main>
