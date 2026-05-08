@@ -13,7 +13,7 @@ export default {
       },
       fontFamily: {
         display: ["Teko", "sans-serif"],
-        sans: ["Inter", "sans-serif"],
+        sans: ["Poppins", "sans-serif"],
         accent: ["Oswald", "sans-serif"],
       },
       backgroundImage: {

@@ -4,7 +4,7 @@ import { Wrench, ShieldAlert, Cpu, Truck, MapPin, Phone, ArrowRight, Settings, C
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import Lenis from "lenis";
-import mechanicImage from './assets/image.png';
+
 
 function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -64,7 +64,7 @@ const Navbar = () => {
       >
         <div className="container mx-auto flex justify-between items-center text-ak-dark-grey relative z-[60]">
           <div className="flex items-center gap-2 group cursor-pointer z-[60]">
-            <div className="text-4xl font-display font-bold italic tracking-tighter text-ak-red">AK</div>
+            <img src="/logo.png" alt="AK Logo" className="h-12 w-auto object-contain" />
             <div className="text-3xl font-display font-medium tracking-tight mt-1">MOTORS</div>
           </div>
 
@@ -201,9 +201,9 @@ const Hero = () => {
             animate={{ y: [-15, 15, -15] }}
             transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
             style={{ willChange: "transform" }}
-            src="/hero_truck.png"
+            src="/14.jpeg"
             alt="3D Heavy Commercial Truck"
-            fetchpriority="high"
+            loading="lazy"
             decoding="async"
             className="w-full h-auto object-contain drop-shadow-2xl z-10 relative scale-110 md:scale-125 lg:scale-150 origin-bottom right-0 lg:-right-10"
           />
@@ -257,7 +257,7 @@ const About = () => {
             <div className="absolute -top-6 -left-6 w-32 h-32 bg-ak-light-grey rounded-lg z-0"></div>
             <div className="absolute -bottom-6 -right-6 w-32 h-32 border-4 border-ak-red/20 rounded-lg z-0"></div>
             <img
-              src={mechanicImage}
+              src="/13.png"
               alt="Mechanic working on engine" 
               loading="lazy" 
               decoding="async" 
@@ -378,12 +378,18 @@ const Services = () => {
 // --- Gallery Section ---
 const Gallery = () => {
   const [images, setImages] = useState([
-    { id: 1, src: new URL('./assets/6.png', import.meta.url).href, title: "Engine Rebuild" },
-    { id: 2, src: new URL('./assets/1.png', import.meta.url).href, title: "Diagnostic Bay" },
-    { id: 3, src: new URL('./assets/2.png', import.meta.url).href, title: "Fleet Bay" },
-    { id: 4, src: new URL('./assets/3.png', import.meta.url).href, title: "Chassis Align" },
-    { id: 5, src: new URL('./assets/4.png', import.meta.url).href, title: "Heavy Parts" },
-    { id: 6, src: new URL('./assets/5.jpeg', import.meta.url).href, title: "Night Ops" }
+    { id: 1, src: "/1.jpeg", title: "Engine Rebuild" },
+    { id: 2, src: "/2.jpeg", title: "Diagnostic Bay" },
+    { id: 3, src: "/3.jpeg", title: "Fleet Bay" },
+    { id: 4, src: "/4.jpeg", title: "Chassis Align" },
+    { id: 5, src: "/5.jpeg", title: "Heavy Parts" },
+    { id: 6, src: "/6.jpeg", title: "Night Ops" },
+    { id: 7, src: "/7.jpeg", title: "Transmission Core" },
+    { id: 8, src: "/8.jpeg", title: "Hydraulic Systems" },
+    { id: 9, src: "/9.jpeg", title: "Suspension Tuning" },
+    { id: 10, src: "/10.jpeg", title: "Fuel Systems" },
+    { id: 11, src: "/11.jpeg", title: "Exhaust Dynamics" },
+    { id: 12, src: "/12.png", title: "Rapid Recovery" }
   ]);
 
   const spans = [
@@ -392,7 +398,13 @@ const Gallery = () => {
     "col-span-1 row-span-2",
     "col-span-1 row-span-1",
     "col-span-1 row-span-1",
-    "col-span-1 md:col-span-2 row-span-1"
+    "col-span-1 md:col-span-2 row-span-1",
+    "col-span-1 row-span-2",
+    "col-span-1 row-span-1",
+    "col-span-2 row-span-1",
+    "col-span-1 row-span-1",
+    "col-span-1 row-span-1",
+    "col-span-2 row-span-2"
   ];
 
   useEffect(() => {
@@ -499,8 +511,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-sans text-ak-mid-grey/60 uppercase tracking-widest mb-1">Dispatch Core Line</h4>
-                    <div className="text-3xl font-display font-medium text-white group-hover:text-ak-red transition-colors">9788111666</div>
-                    <div className="text-xl font-display font-medium text-ak-mid-grey">9895550038 <span className="px-2">|</span> 9080120557</div>
+                    <div className="text-3xl font-display font-medium text-white group-hover:text-ak-red transition-colors">+91 93622 25555</div>
+                    <div className="text-xl font-display font-medium text-ak-mid-grey">+91 97881 11666</div>
                   </div>
                 </div>
               </FadeIn>
@@ -512,8 +524,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-sans text-ak-mid-grey/60 uppercase tracking-widest mb-1">Coordinates</h4>
-                    <div className="text-3xl font-display font-medium text-white group-hover:text-ak-red transition-colors">C.Puthupatti</div>
-                    <div className="text-xl font-display font-medium text-ak-mid-grey">Cumbum Region</div>
+                    <div className="text-3xl font-display font-medium text-white group-hover:text-ak-red transition-colors">Indira colony</div>
+                    <div className="text-xl font-display font-medium text-ak-mid-grey leading-tight">C.Pudupatti, Cumbum - 625556.<br />Theni (Dt)</div>
                   </div>
                 </div>
               </FadeIn>
@@ -521,12 +533,12 @@ const Contact = () => {
               <FadeIn delay={0.4}>
                 <div className="flex items-start gap-6 group">
                   <div className="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center text-ak-red group-hover:bg-ak-red group-hover:text-white transition-colors duration-300">
-                    <Clock size={28} />
+                    <Zap size={28} />
                   </div>
                   <div>
-                    <h4 className="text-sm font-sans text-ak-mid-grey/60 uppercase tracking-widest mb-1">Hours of Operation</h4>
-                    <div className="text-3xl font-display font-medium text-white group-hover:text-ak-red transition-colors">24/7 Availability</div>
-                    <div className="text-xl font-display font-medium text-ak-mid-grey">Emergency Roadside Unit Active</div>
+                    <h4 className="text-sm font-sans text-ak-mid-grey/60 uppercase tracking-widest mb-1">Email Support</h4>
+                    <div className="text-3xl font-display font-medium text-white group-hover:text-ak-red transition-colors">akcumbum@gmail.com</div>
+                    <div className="text-xl font-display font-medium text-ak-mid-grey">Direct Technical Inquiry</div>
                   </div>
                 </div>
               </FadeIn>
@@ -620,7 +632,7 @@ const Footer = () => (
   <footer className="bg-[#05080f] py-10 border-t-[6px] border-ak-red">
     <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
       <div className="flex items-center gap-2 grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all">
-        <div className="text-4xl font-display font-bold italic tracking-tighter text-ak-red">AK</div>
+        <img src="/logo.png" alt="AK Logo" className="h-12 w-auto object-contain" />
         <div className="text-3xl font-display font-medium tracking-tight text-white mt-1">MOTORS</div>
       </div>
       <p className="font-sans text-ak-mid-grey text-sm font-medium uppercase tracking-widest text-center md:text-left">
@@ -628,12 +640,50 @@ const Footer = () => (
       </p>
       <div className="flex gap-4">
         <p className="font-sans text-ak-mid-grey text-sm font-medium uppercase tracking-widest text-center md:text-right">
-          Designed by <span className="text-ak-red font-bold">Navi Promotions</span>
+          Designed by <a href="https://www.navipromotions.in/" target="_blank" rel="noopener noreferrer" className="text-ak-red font-bold hover:underline">Navi Promotions</a>
         </p>
       </div>
     </div>
   </footer>
 );
+
+const ScrollProgress = () => {
+  const { scrollYProgress } = useScroll();
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-1.5 bg-ak-red origin-left z-[100]"
+      style={{ scaleX: scrollYProgress }}
+    />
+  );
+};
+
+const BackToTop = () => {
+  const [visible, setVisible] = useState(false);
+  
+  useEffect(() => {
+    const toggleVisible = () => {
+      setVisible(window.scrollY > 500);
+    };
+    window.addEventListener('scroll', toggleVisible);
+    return () => window.removeEventListener('scroll', toggleVisible);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-10 right-10 z-[70] bg-ak-red text-white p-4 rounded-none shadow-2xl hover:bg-red-700 transition-all group"
+        >
+          <ArrowRight className="w-6 h-6 -rotate-90 group-hover:-translate-y-1 transition-transform" />
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+};
 
 // --- Main App ---
 export default function App() {
@@ -660,6 +710,8 @@ export default function App() {
 
   return (
     <div className="relative bg-ak-white min-h-screen">
+      <ScrollProgress />
+      <BackToTop />
       <Navbar />
       <main>
         <Hero />
