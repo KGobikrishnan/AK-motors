@@ -65,7 +65,7 @@ const Navbar = () => {
         <div className="container mx-auto flex justify-between items-center text-ak-dark-grey relative z-[60]">
           <div className="flex items-center gap-2 group cursor-pointer z-[60]">
             <img src="/logo.png" alt="AK Logo" className="h-12 w-auto object-contain" />
-            <div className="text-3xl font-display font-medium tracking-tight mt-1">MOTORS</div>
+            <div className="text-2xl font-display font-medium tracking-tight mt-1">MOTORS</div>
           </div>
 
           <div className="hidden md:flex gap-10 items-center">
